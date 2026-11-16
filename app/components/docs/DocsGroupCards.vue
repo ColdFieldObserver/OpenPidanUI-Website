@@ -8,10 +8,9 @@ defineProps<{ groups: DocGroup[] }>();
   <div class="grid gap-5 md:grid-cols-2">
     <UCard v-for="group in groups" :key="group.name" variant="soft" :ui="{ body: 'p-6' }">
       <div class="flex items-center gap-2">
-        <UIcon :name="group.icon" class="size-5 text-primary" />
         <h2 class="text-base font-semibold text-highlighted">{{ group.name }}</h2>
         <UBadge variant="subtle" color="neutral" size="sm" class="ml-auto"
-          >{{ group.entries.length }} 篇</UBadge
+          >{{ group.displayEntries.length }} 篇</UBadge
         >
       </div>
 
@@ -20,7 +19,7 @@ defineProps<{ groups: DocGroup[] }>();
       </p>
 
       <ol class="mt-4 space-y-1.5">
-        <li v-for="entry in group.entries" :key="entry.path">
+        <li v-for="entry in group.displayEntries" :key="entry.path">
           <NuxtLink
             :to="withBase(entry.path)"
             class="group flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-muted transition-colors hover:bg-elevated hover:text-highlighted"

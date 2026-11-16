@@ -44,7 +44,8 @@ function walkDocs(dir: string, routeBase: string, result: DocsWalkResult): void 
 }
 
 export function buildRoutes(): string[] {
-  const base = ['/', '/download', '/docs', '/api/releases.json', '/404.html'];
+  // GitHub Releases 已改为客户端运行时拉取，构建期不再预渲染 /api/releases.json
+  const base = ['/', '/download', '/docs', '/404.html'];
   const result: DocsWalkResult = { routes: [], categories: new Set() };
   walkDocs(DOCS_DIR, '/docs', result);
 
@@ -53,4 +54,15 @@ export function buildRoutes(): string[] {
     .sort((a, b) => a.localeCompare(b, 'zh-CN'))
     .map((name) => `/docs/category/${encodeURIComponent(name)}`);
   return [...base, ...result.routes, ...categoryRoutes];
+}
+
+/** 可被搜索引擎收录的站点页面，不包含搜索、错误页、接口与订阅源。 */
+export function buildSitemapRoutes(): string[] {
+  return buildRoutes().filter(
+    (route) =>
+      route !== '/search/' &&
+      route !== '/404.html' &&
+      !route.startsWith('/api/') &&
+      !/\.(xml|json)$/.test(route),
+  );
 }

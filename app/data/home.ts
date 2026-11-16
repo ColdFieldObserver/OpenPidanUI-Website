@@ -1,27 +1,23 @@
+/** 首页宣传图 */
+export const PROMO_IMAGE = 'https://img.remit.ee/i/UQi9eaPKuGU4';
+
 export interface FeatureItem {
   icon: string;
   title: string;
   description: string;
 }
 
-/** 六条卖点，全部出自 OpenPidanUI 的自述（D:\TestProject\Eggix\README.md）。 */
 export const HOME_FEATURES: FeatureItem[] = [
   {
     icon: 'i-lucide-terminal',
     title: '.NET 10 技术栈',
-    description: '组件全面转向 .NET 10，告别易语言：高 DPI 缩放不再是玄学，杀软误报也少了一大截。',
+    description: '组件全面转向 .NET 10，告别易语言，杀软误报也少了一大截。',
   },
   {
-    icon: 'i-lucide-shield-check',
-    title: '不修改系统文件',
+    icon: 'i-lucide-star',
+    title: '继承 EggyUI 设计理念',
     description:
-      '不替换 imageres.dll.mun、shell32.dll.mun 这类文件。美化靠主题包、壁纸与音效，卸载只要切回默认主题。',
-  },
-  {
-    icon: 'i-lucide-palette',
-    title: '精简版美化',
-    description:
-      '只保留定制主题与 Rainmeter 小组件，去掉冗余的持久化改动，日常用起来接近原版 Windows。',
+      '组件的外观风格继承了 EggyUI 的蛋仔风设计理念，你看到的组件的样子还是那个熟悉的样子。',
   },
   {
     icon: 'i-lucide-layers',
@@ -33,11 +29,30 @@ export const HOME_FEATURES: FeatureItem[] = [
     title: '开源透明',
     description: '源码可审查，欢迎提交 issue 与 PR。改了什么、为什么改，都能在提交记录里找到。',
   },
+];
+
+export interface ShowcaseItem {
+  id?: string;
+  title?: string;
+  caption?: string;
+  image: string;
+  width?: number;
+  height?: number;
+  alt?: string;
+}
+
+export const SHOWCASE_ITEMS: ShowcaseItem[] = [
   {
-    icon: 'i-lucide-package',
-    title: '组件全家桶',
-    description:
-      'PowerShell 部署脚本、Rainmeter 小组件设置程序、头像制作器 AvatarMaker，配套齐全。',
+    id: 'widgets-1',
+    title: 'Rainmeter 小组件演示',
+    caption: '目前这些小组还在完善中。',
+    image: 'https://img.remit.ee/i/UQi9eaPKuGU4',
+    width: 1280,
+    height: 720,
+    alt: '小组件在桌面上的演示画面',
+  },
+  {
+    image: 'https://via.placeholder.com/1920x1080.webp',
   },
 ];
 
@@ -49,7 +64,11 @@ export interface TimelineItem {
 
 /** 名称沿革：只讲事实，不复述争议。 */
 export const ABOUT_TIMELINE: TimelineItem[] = [
-  { time: '2024-04', title: 'EggyUI 启动', description: '以易语言为主要技术栈起步。' },
+  {
+    time: '2024-04',
+    title: 'EggyUI 启动',
+    description: '以易语言为主要技术栈起步。',
+  },
   {
     time: '2026-10',
     title: 'Finale Mini 发布',
@@ -60,20 +79,27 @@ export const ABOUT_TIMELINE: TimelineItem[] = [
     title: '更名 OpenPidanUI',
     description: 'OpenEggyUI 全面重构，转向 .NET 10，并恢复开发。',
   },
-  { time: '至今', title: '随 PidanUI 一起更新', description: '组件按模块发布，与主项目同步迭代。' },
+  {
+    time: '至今',
+    title: '随 PidanUI 一起更新',
+    description: '组件按模块发布，与主项目同步迭代。',
+  },
 ];
 
 export const ABOUT_TEXT = [
-  'OpenPidanUI 是 PidanUI 的辅助组件开源代码库，存放系统镜像、独立美化包所需的配套组件源代码。',
-  '它不负责替换系统文件，也不做持久化的系统改动——美化交给主题包与 Rainmeter，出问题切回默认主题就能恢复。',
+  'OpenPidanUI 是 PidanUI 的开源辅助组件库，源于当初未能推进的 OpenEggyUI 项目。',
 ];
 
 export interface JoinCard {
   title: string;
   description: string;
   icon: string;
-  links: { label: string; to: string; external?: boolean }[];
-  tags: string[];
+  links: {
+    label: string;
+    to: string;
+    external?: boolean;
+    icon?: string;
+  }[];
 }
 
 export const JOIN_CARDS: JoinCard[] = [
@@ -82,19 +108,38 @@ export const JOIN_CARDS: JoinCard[] = [
     description: '装上了想反馈问题，或者只是来看看别人怎么用。',
     icon: 'i-lucide-users',
     links: [
-      { label: 'QQ 群', to: '#qq-group', external: true },
-      { label: '哔哩哔哩', to: 'https://space.bilibili.com/', external: true },
+      {
+        label: 'QQ 群',
+        to: 'https://qm.qq.com/q/Km93h8YWAw',
+        external: true,
+        icon: 'i-simple-icons-tencentqq',
+      },
+      {
+        label: '哔哩哔哩',
+        to: 'https://space.bilibili.com/3546563248916693',
+        external: true,
+        icon: 'i-simple-icons-bilibili',
+      },
     ],
-    tags: [],
   },
   {
     title: '加入开发组',
     description: '组件都是模块化的，挑一个感兴趣的模块就能上手。',
     icon: 'i-lucide-code-xml',
     links: [
-      { label: 'GitHub 仓库', to: 'https://github.com/PidanUI-Team/OpenPidanUI', external: true },
+      {
+        label: 'GitHub',
+        to: 'https://github.com/PidanUI-Team',
+        external: true,
+        icon: 'i-simple-icons-github',
+      },
+      {
+        label: 'GitCode',
+        to: 'https://gitcode.com/PidanUI-Team',
+        external: true,
+        icon: 'i-simple-icons-atomgit',
+      },
       { label: '开发者文档', to: '/docs/developer' },
     ],
-    tags: ['.NET 10', 'C#', 'WPF', 'Rainmeter', 'PowerShell'],
   },
 ];

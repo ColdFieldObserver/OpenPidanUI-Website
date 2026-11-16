@@ -2,6 +2,7 @@ import { createRequire } from 'node:module';
 import { dirname } from 'node:path';
 import tailwindcss from '@tailwindcss/vite';
 import { buildRoutes } from './build/routes';
+import { rehypeExternalLinksBlank } from './build/rehype-external-links';
 
 // ---- 字体（自包含）----
 // 生产：`nuxi generate` 之后由 scripts/sync-fonts.mjs 生成 /fonts/harmonyos.css；
@@ -108,6 +109,10 @@ export default defineNuxtConfig({
             'diff',
           ],
         },
+        // 站外链接一律新开标签页，站内相对路径/锚点保持原样（与 PidanUI 官网同款规则）
+        rehypePlugins: {
+          'rehype-external-links-blank': { instance: rehypeExternalLinksBlank },
+        },
       },
     },
   },
@@ -140,6 +145,7 @@ export default defineNuxtConfig({
         'lucide:folder-git-2',
         'lucide:package',
         'lucide:sparkles',
+        'lucide:star',
         'lucide:shield-check',
         'lucide:layers',
         'lucide:palette',
@@ -148,17 +154,24 @@ export default defineNuxtConfig({
         'lucide:file-text',
         'lucide:clock',
         'lucide:circle-alert',
+        'lucide:info',
         'lucide:arrow-left',
         'lucide:users',
         'lucide:arrow-right',
         'lucide:external-link',
+        'lucide:archive',
+        'lucide:globe',
+        'lucide:lightbulb',
+        'lucide:snowflake',
         'lucide:tag',
         'lucide:hard-drive-download',
         'lucide:arrow-up',
+        'lucide:git-branch',
         'simple-icons:bilibili',
         'simple-icons:github',
-        'simple-icons:gitcode',
+        'simple-icons:atomgit',
         'simple-icons:tencentqq',
+        'simple-icons:windows',
       ],
     },
   },

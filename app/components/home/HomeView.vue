@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ABOUT_TEXT, ABOUT_TIMELINE } from '~/data/home';
-import { PROMO_IMAGE } from '#shared/site';
+import { ABOUT_TEXT, ABOUT_TIMELINE, PROMO_IMAGE } from '~/data/home';
 
 // 首页版式与 PidanUI 官网一致：Hero（左文右图）→ 温馨提示 → 项目特性 →
 // 组件展示 → 关于 → 加入开发，区块节奏走同一份 SECTION_UI。
@@ -32,14 +31,13 @@ const SECTION_UI = {
         <span
           class="hero-title text-[clamp(34px,5.4vw,54px)] leading-[1.15] font-extrabold tracking-[1px]"
         >
-          Open<em>PidanUI</em>
+          OpenPidanUI
         </span>
       </template>
 
       <template #description>
         <p class="max-w-[560px] text-[15.5px] leading-[1.8] text-toned">
-          用代码，为 PidanUI 构建更安全、更稳定的美化体验。
-          组件全部模块化、可审查，不替换任何系统文件。
+          在你的电脑上自由定制一个《蛋仔派对》风格的桌面，只需几分钟。
         </p>
       </template>
 
@@ -85,17 +83,17 @@ const SECTION_UI = {
     <!-- 重要说明 -->
     <UAlert
       class="mb-12"
-      color="primary"
+      color="info"
       variant="soft"
-      icon="i-lucide-triangle-alert"
+      icon="i-lucide-info"
       title="温馨提示"
-      description="OpenPidanUI 是 PidanUI 的辅助组件开源代码库，面向 Windows 10 及以上系统。组件不做持久化的系统改动，卸载时切回默认主题即可恢复。"
+      description="OpenPidanUI 是 PidanUI 的开源辅助组件库，面向 Windows 10 及以上系统。"
     />
 
     <!-- 项目特性 -->
     <UPageSection
       title="项目特性"
-      description="桌面美化最容易踩的两个坑是「改坏系统」和「装完不敢卸」。这一版把这两件事都当作硬约束。"
+      description="OpenPidanUI 的组件和 EggyUI 同源，但在此基础上有所创新。"
       :ui="{ ...SECTION_UI, container: 'pt-0 pb-10 sm:pb-12 lg:pb-14 gap-6 sm:gap-8' }"
     >
       <FeatureGrid />
@@ -104,7 +102,7 @@ const SECTION_UI = {
     <!-- 组件展示 -->
     <UPageSection
       title="看看它长什么样"
-      description="截图目前是占位素材，只用来确认版式；正式宣传图会在上线前整体替换。"
+      description="目前它只有 Rainmeter 小组件，未来还会开发更多组件。"
       :ui="SECTION_UI"
     >
       <ShowcaseCarousel />
@@ -147,7 +145,7 @@ const SECTION_UI = {
     <!-- 加入开发 -->
     <UPageSection
       title="一起把它做完"
-      description="组件按模块划分，一个人也能维护一个模块。遇到问题先在文档里翻一翻，再来群里说。"
+      description="（目前这个官网还没做完，但是你现在就可以参与这个官网的开发。至于别的事情，后面再说。）"
       :ui="SECTION_UI"
     >
       <JoinDevSection />

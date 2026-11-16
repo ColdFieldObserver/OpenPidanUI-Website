@@ -5,7 +5,8 @@ import { SITE } from '#shared/site';
 
 // 全站底栏（与 PidanUI 官网同构）：品牌与站点导航（同时承担无 JS 时的导航兜底）、
 // 关注我们、友情链接；底部左侧是版权说明。
-const year = new Date().getFullYear();
+/** 站点年份，需要写死成字符串而不是动态获取 */
+const year: string = '2026';
 </script>
 
 <template>
@@ -28,7 +29,7 @@ const year = new Date().getFullYear();
               <span>{{ SITE.brand }}</span>
             </NuxtLink>
             <p class="mt-3 max-w-xs text-sm leading-relaxed text-toned">
-              PidanUI 的辅助组件开源代码库：模块化、可审查、不修改系统文件。
+              PidanUI 的开源辅助组件库，面向 Windows 10 及以上系统。
             </p>
             <nav class="mt-4 flex flex-wrap gap-x-4 gap-y-2" aria-label="页脚导航">
               <NuxtLink
@@ -38,19 +39,18 @@ const year = new Date().getFullYear();
                 :to="item.external ? item.href : withBase(item.href)"
                 :target="item.external ? '_blank' : undefined"
                 :rel="item.external ? 'noopener noreferrer' : undefined"
-                >{{ item.label }}</NuxtLink
+                >{{ item.label ?? '友情链接条目' }}</NuxtLink
               >
             </nav>
           </div>
 
-          <!-- 关注我们 -->
-          <div class="min-w-0">
+          <div class="min-w-0 lg:col-span-2">
             <h2 class="mb-3 text-[13px] font-bold tracking-[0.5px] text-dimmed uppercase">
-              关注我们
+              友情链接
             </h2>
-            <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-1">
+            <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
               <a
-                v-for="link in SOCIAL_LINKS"
+                v-for="link in FRIEND_LINKS"
                 :key="link.key"
                 class="flex items-center gap-2.5 rounded-lg border border-default px-2.5 py-2 text-sm text-toned transition-colors hover:border-brand-600/35 hover:text-brand-600"
                 :href="link.href"
@@ -62,42 +62,28 @@ const year = new Date().getFullYear();
               </a>
             </div>
           </div>
-
-          <!-- 友情链接 -->
-          <div class="min-w-0">
-            <h2 class="mb-3 text-[13px] font-bold tracking-[0.5px] text-dimmed uppercase">
-              友情链接
-            </h2>
-            <ul class="space-y-2">
-              <li v-for="link in FRIEND_LINKS" :key="link.href">
-                <a
-                  :href="link.href"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="group flex flex-col rounded-lg border border-default px-2.5 py-2 text-sm text-toned transition-colors hover:border-brand-600/35 hover:text-brand-600"
-                >
-                  <span class="flex items-center gap-1">
-                    {{ link.label }}
-                    <UIcon
-                      name="i-lucide-arrow-up-right"
-                      class="size-3 shrink-0 opacity-0 transition-opacity group-hover:opacity-100"
-                    />
-                  </span>
-                  <span class="text-xs text-dimmed">{{ link.description }}</span>
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
       </UContainer>
     </template>
 
     <template #left>
       <p class="text-sm leading-relaxed text-dimmed">
-        © {{ year }} {{ SITE.brand }} ·
-        本项目为《蛋仔派对》同人创作，非官方出品，与网易游戏、微软无隶属或赞助关系。 代码以
-        {{ SITE.license }} 授权；游戏素材权利归原权利人。
+        © {{ year }} {{ SITE.brand }} · 本项目为《蛋仔派对》同人创作，非《蛋仔派对》官方出品。
       </p>
+    </template>
+
+    <template #right>
+      <!-- 社交图标 -->
+      <UButton
+        v-for="link in SOCIAL_LINKS"
+        :key="link.href"
+        :to="link.href"
+        target="_blank"
+        :icon="link.icon"
+        size="lg"
+        variant="ghost"
+        color="neutral"
+      />
     </template>
   </UFooter>
 </template>
