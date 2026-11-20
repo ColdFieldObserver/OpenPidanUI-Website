@@ -1,5 +1,6 @@
 import { createRequire } from 'node:module';
 import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import tailwindcss from '@tailwindcss/vite';
 import { buildRoutes } from './build/routes';
 import { rehypeExternalLinksBlank } from './build/rehype-external-links';
@@ -111,7 +112,13 @@ export default defineNuxtConfig({
         },
         // 站外链接一律新开标签页，站内相对路径/锚点保持原样（与 PidanUI 官网同款规则）
         rehypePlugins: {
-          'rehype-external-links-blank': { instance: rehypeExternalLinksBlank },
+          'rehype-external-links-blank': {
+            instance: rehypeExternalLinksBlank,
+            options: {},
+            src: fileURLToPath(
+              new URL('./build/rehype-external-links.ts', import.meta.url),
+            ).replaceAll('\\', '/'),
+          },
         },
       },
     },
