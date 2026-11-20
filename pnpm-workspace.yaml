@@ -6,7 +6,7 @@ nodeLinker: hoisted
 # pnpm 12 对「装了但没放行 postinstall」的依赖是**报错**而不是警告（ERR_PNPM_IGNORED_BUILDS），
 # 而且不同平台装到的原生包不一样 —— 少写一个，本地能装、CI 就红。
 # ⚠ 这张表要覆盖所有带 install 脚本的依赖，包括只在 Linux 上才装到的：
-#   esbuild / @parcel/watcher / better-sqlite3 / vue-demi  基础四件
+#   esbuild / @parcel/watcher / vue-demi  基础三件（内容库用 Node 内置 node:sqlite，无 better-sqlite3）
 #   workerd             wrangler 的运行时，本地 preview 用
 #   lightningcss        Tailwind 4 的 CSS 处理（Linux 上是独立原生包）
 #   @tailwindcss/oxide  Tailwind 4 的扫描器（Linux 上是独立原生包，CI 报错就是它）
@@ -14,7 +14,6 @@ nodeLinker: hoisted
 allowBuilds:
   esbuild: true
   '@parcel/watcher': true
-  better-sqlite3: true
   vue-demi: true
   workerd: true
   lightningcss: true
