@@ -52,10 +52,11 @@ pnpm lint        # ESLint：可能出错的地方 + 分号硬约束
 pnpm format:check
 ```
 
-`pnpm build` 里那两步不要省：
+`pnpm build` 里那三步不要省：
 
+- `generate-sitemap.mjs`：生成网站地图。
 - `scripts/sync-fonts.mjs`：把 HarmonyOS Sans SC 的分包字体复制进 `.output/public/fonts/`；
-- `scripts/verify-output.mjs`：逐条校验 `build/routes.ts` 的路由都有产物（`failOnError` 抓不到漏页）。
+- `scripts/verify-output.mjs`：逐条校验 `build/routes.ts` 的路由都有产物（`failOnError` 抓不到漏页），同时也校验网站地图生成和字体复制状态。
 
 > [!TIP]
 > 如果 `npm install` 安装较慢，可先执行 `npm config set registry https://registry.npmmirror.com` 切换至镜像源。
